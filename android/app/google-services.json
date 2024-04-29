@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "266489661348",
+    "project_id": "resume-builder-882ec",
+    "storage_bucket": "resume-builder-882ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266489661348:android:eed0c5cd34f3ee3ca4a331",
+        "android_client_info": {
+          "package_name": "com.example.resume_builder_twinkle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsJa5UzrYvcf3lqhgS3Ko1CQIfFFFFHJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
