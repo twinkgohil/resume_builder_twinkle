@@ -9,6 +9,9 @@ import 'package:resume_builder_twinkle/models/skills_model.dart';
 import 'package:resume_builder_twinkle/modules/skills/skills_controller.dart';
 import 'package:resume_builder_twinkle/utiils/math.dart';
 
+import '../resume/resume_binding.dart';
+import '../resume/resume_view.dart';
+
 class SkillsView extends GetView<SkillsController> {
   const SkillsView({super.key});
 
@@ -33,6 +36,8 @@ class SkillsView extends GetView<SkillsController> {
                       controller: controller.skillsController,
                       textInputAction: TextInputAction.next,
                       hintText: "Skills",
+                      maxLength: 500,
+                      maxLines: 7,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Please enter skills";
@@ -43,41 +48,47 @@ class SkillsView extends GetView<SkillsController> {
                     const SizedBox(
                       height: 15,
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (controller.formKey.currentState!.validate()) {
-                            if (controller.isInserted.value == false) {
-                              var data = Skills(
-                                  skills:
-                                      controller.skillsController.value.text);
-                              controller.skillsDatabaseService.add(data);
-                              Fluttertoast.showToast(
-                                  msg: "Data inserted successfully",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.green,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
-                              controller.isInserted.value = true;
-                            } else {
-                              var data = Skills(
-                                  skills:
-                                      controller.skillsController.value.text);
-                              controller.skillsDatabaseService
-                                  .update('0', data);
-                              Fluttertoast.showToast(
-                                  msg: "Data updated successfully",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.green,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
+                    Obx(() {
+                      return ElevatedButton(
+                          onPressed: () {
+                            if (controller.formKey.currentState!.validate()) {
+                              if (controller.isInserted.value == false) {
+                                var data = Skills(
+                                    skills:
+                                        controller.skillsController.value.text);
+                                controller.skillsDatabaseService.add(data);
+                                Fluttertoast.showToast(
+                                    msg: "Data inserted successfully",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.green,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0);
+                                controller.isInserted.value = true;
+                                Get.to(const ResumeView(),
+                                    binding: ResumeBinding());
+                              } else {
+                                var data = Skills(
+                                    skills:
+                                        controller.skillsController.value.text);
+                                controller.skillsDatabaseService
+                                    .update(Get.arguments.toString(), data);
+                                Fluttertoast.showToast(
+                                    msg: "Data updated successfully",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.green,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0);
+                                Get.to(const ResumeView(),
+                                    binding: ResumeBinding());
+                              }
                             }
-                          }
-                        },
-                        child: const Text('Save')),
+                          },
+                          child: const Text('Save'));
+                    }),
                   ],
                 ))
           ],

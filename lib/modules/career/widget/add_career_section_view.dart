@@ -9,7 +9,12 @@ import 'package:resume_builder_twinkle/commom_widgets/base_text.dart';
 import 'package:resume_builder_twinkle/commom_widgets/input_field.dart';
 import 'package:resume_builder_twinkle/models/career_model.dart';
 import 'package:resume_builder_twinkle/modules/career/career_controller.dart';
+import 'package:resume_builder_twinkle/modules/education/education_binding.dart';
+import 'package:resume_builder_twinkle/modules/education/education_view.dart';
 import 'package:resume_builder_twinkle/utiils/datePicker_utils.dart';
+
+import '../../resume/resume_binding.dart';
+import '../../resume/resume_view.dart';
 
 class AddCareerSectionView extends GetView<CareerController> {
   const AddCareerSectionView({super.key});
@@ -159,6 +164,7 @@ class AddCareerSectionView extends GetView<CareerController> {
                           textColor: Colors.white,
                           fontSize: 16.0);
                       controller.isInserted.value = true;
+                      Get.back();
                     } else {
                       var data = Career(
                           companyName: controller.companyNameController.text,
@@ -177,6 +183,7 @@ class AddCareerSectionView extends GetView<CareerController> {
                           backgroundColor: Colors.green,
                           textColor: Colors.white,
                           fontSize: 16.0);
+                      Get.to(const ResumeView(), binding: ResumeBinding());
                     }
                   }
                 },

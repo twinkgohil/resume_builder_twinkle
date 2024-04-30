@@ -5,6 +5,8 @@ import 'package:resume_builder_twinkle/commom_widgets/base_appbar.dart';
 import 'package:resume_builder_twinkle/commom_widgets/base_text.dart';
 import 'package:resume_builder_twinkle/modules/education/education_controller.dart';
 import 'package:resume_builder_twinkle/modules/education/widget/add_education_section_view.dart';
+import 'package:resume_builder_twinkle/modules/skills/skills_binding.dart';
+import 'package:resume_builder_twinkle/modules/skills/skills_view.dart';
 import 'package:resume_builder_twinkle/utiils/math.dart';
 
 class EducationView extends GetView<EducationController> {
@@ -25,7 +27,13 @@ class EducationView extends GetView<EducationController> {
                   itemBuilder: (BuildContext context, int index) =>
                       addSectionWidget(index: index)),
               SizedBox(height: getSize(20),),
-              addSectionButton()
+              addSectionButton(),
+              SizedBox(height: getSize(20),),
+              ElevatedButton(
+                  onPressed: () {
+                    Get.to(const SkillsView(), binding: SkillsBinding());
+                  },
+                  child: const Text('Save')),
             ],
           ),
         );

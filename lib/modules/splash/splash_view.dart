@@ -6,6 +6,7 @@ import 'package:resume_builder_twinkle/modules/contact_info/contact_info_binding
 import 'package:resume_builder_twinkle/modules/contact_info/contact_info_view.dart';
 import 'package:resume_builder_twinkle/modules/education/education_binding.dart';
 import 'package:resume_builder_twinkle/modules/education/education_view.dart';
+import 'package:resume_builder_twinkle/modules/splash/on_boarding_screen.dart';
 import 'package:resume_builder_twinkle/utiils/math.dart';
 
 class SplashView extends StatelessWidget {
@@ -14,8 +15,7 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
-      Get.off(const ContactInfoView(),
-          binding: ContactInfoBinding(), transition: Transition.fadeIn);
+      Get.off(const OnBoardingScreen(), transition: Transition.fadeIn);
     });
     return Scaffold(
       backgroundColor: Colors.white,
@@ -24,7 +24,7 @@ class SplashView extends StatelessWidget {
         child: Center(
           child: BaseText(
             text: "Welcome",
-            fontSize: getSize(16),
+            fontSize: getSize(25),
             fontWeight: FontWeight.w500,
           ),
         ),

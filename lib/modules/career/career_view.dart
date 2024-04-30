@@ -5,6 +5,8 @@ import 'package:resume_builder_twinkle/commom_widgets/base_appbar.dart';
 import 'package:resume_builder_twinkle/commom_widgets/base_text.dart';
 import 'package:resume_builder_twinkle/modules/career/career_controller.dart';
 import 'package:resume_builder_twinkle/modules/career/widget/add_career_section_view.dart';
+import 'package:resume_builder_twinkle/modules/education/education_binding.dart';
+import 'package:resume_builder_twinkle/modules/education/education_view.dart';
 import 'package:resume_builder_twinkle/utiils/math.dart';
 
 class CareerView extends GetView<CareerController> {
@@ -25,7 +27,14 @@ class CareerView extends GetView<CareerController> {
                   itemBuilder: (BuildContext context, int index) =>
                       addSectionWidget(index: index)),
               SizedBox(height: getSize(20),),
-              addSectionButton()
+              addSectionButton(),
+              ElevatedButton(
+                  onPressed: () {
+                    if (controller.formKey.currentState!.validate()) {
+                      Get.to(const EducationView(), binding: EducationBinding());
+                    }
+                  },
+                  child: const Text('Save')),
             ],
           ),
         );

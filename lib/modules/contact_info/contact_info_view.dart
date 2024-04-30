@@ -6,6 +6,10 @@ import 'package:resume_builder_twinkle/commom_widgets/base_appbar.dart';
 import 'package:resume_builder_twinkle/commom_widgets/input_field.dart';
 import 'package:resume_builder_twinkle/models/contact_info_model.dart';
 import 'package:resume_builder_twinkle/modules/contact_info/contact_info_controller.dart';
+import 'package:resume_builder_twinkle/modules/personal_statement/statement_binding.dart';
+import 'package:resume_builder_twinkle/modules/personal_statement/statement_view.dart';
+import 'package:resume_builder_twinkle/modules/resume/resume_binding.dart';
+import 'package:resume_builder_twinkle/modules/resume/resume_view.dart';
 
 class ContactInfoView extends GetView<ContactInfoController> {
   const ContactInfoView({super.key});
@@ -90,6 +94,7 @@ class ContactInfoView extends GetView<ContactInfoController> {
                             textColor: Colors.white,
                             fontSize: 16.0);
                         controller.isInserted.value = true;
+                        Get.to(const StatementView(), binding: StatementBinding());
                       } else {
                         var data = ContactInfo(
                             email: controller.emailController.value.text,
@@ -105,10 +110,11 @@ class ContactInfoView extends GetView<ContactInfoController> {
                             backgroundColor: Colors.green,
                             textColor: Colors.white,
                             fontSize: 16.0);
+                        Get.to(const ResumeView(), binding: ResumeBinding());
                       }
                     }
                   },
-                  child: Text('Save')),
+                  child: const Text('Save')),
             ],
           ),
         ),

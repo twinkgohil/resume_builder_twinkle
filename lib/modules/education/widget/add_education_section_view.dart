@@ -10,7 +10,12 @@ import 'package:resume_builder_twinkle/commom_widgets/base_text.dart';
 import 'package:resume_builder_twinkle/commom_widgets/input_field.dart';
 import 'package:resume_builder_twinkle/models/education_model.dart';
 import 'package:resume_builder_twinkle/modules/education/education_controller.dart';
+import 'package:resume_builder_twinkle/modules/skills/skills_binding.dart';
+import 'package:resume_builder_twinkle/modules/skills/skills_view.dart';
 import 'package:resume_builder_twinkle/utiils/datePicker_utils.dart';
+
+import '../../resume/resume_binding.dart';
+import '../../resume/resume_view.dart';
 
 class AddEducationSectionView extends GetView<EducationController> {
   const AddEducationSectionView({super.key});
@@ -149,6 +154,7 @@ class AddEducationSectionView extends GetView<EducationController> {
                             textColor: Colors.white,
                             fontSize: 16.0);
                         controller.isInserted.value = true;
+                        Get.back();
                       } else {
                         var data = Education(
                             universityName:
@@ -168,6 +174,7 @@ class AddEducationSectionView extends GetView<EducationController> {
                             backgroundColor: Colors.green,
                             textColor: Colors.white,
                             fontSize: 16.0);
+                        Get.to(const ResumeView(), binding: ResumeBinding());
                       }
                     }
                   },
