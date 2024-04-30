@@ -23,7 +23,7 @@ class DatePickerUtils {
             child: child!));
     if (selected != null && selected != selectedDate) {
       selectedDate = selected;
-      String formattedDate = DateFormat('MM/yyyy').format(selected);
+      String formattedDate = DateFormat('dd-MM-yyyy').format(selected);
     }
     return selected;
   }

@@ -3,22 +3,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:resume_builder_twinkle/commom_widgets/base_appbar.dart';
 import 'package:resume_builder_twinkle/commom_widgets/base_text.dart';
 import 'package:resume_builder_twinkle/commom_widgets/input_field.dart';
-import 'package:resume_builder_twinkle/models/education_model.dart';
-import 'package:resume_builder_twinkle/modules/education/education_controller.dart';
+import 'package:resume_builder_twinkle/models/career_model.dart';
+import 'package:resume_builder_twinkle/modules/career/career_controller.dart';
 import 'package:resume_builder_twinkle/utiils/datePicker_utils.dart';
 
-class AddEducationSectionView extends GetView<EducationController> {
-  const AddEducationSectionView({super.key});
+class AddCareerSectionView extends GetView<CareerController> {
+  const AddCareerSectionView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BaseAppBar(title: "Add education"),
+      appBar: const BaseAppBar(title: "Add Career"),
       body: Obx(() {
         return Column(
           children: [
@@ -26,14 +25,14 @@ class AddEducationSectionView extends GetView<EducationController> {
                 key: controller.formKey,
                 child: Column(
                   children: [
-                    const BaseText(text: "University/School name"),
+                    const BaseText(text: "Company Name"),
                     InputTextField(
-                      controller: controller.universityNameController,
+                      controller: controller.companyNameController,
                       textInputAction: TextInputAction.next,
-                      hintText: "University/School name",
+                      hintText: "Company Name",
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Please enter University/School name";
+                          return "Please enter company name";
                         }
                         return null;
                       },
@@ -41,14 +40,29 @@ class AddEducationSectionView extends GetView<EducationController> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const BaseText(text: "Qualification"),
+                    const BaseText(text: "Job Title"),
                     InputTextField(
-                      controller: controller.qualificationController,
+                      controller: controller.jobTitleController,
                       textInputAction: TextInputAction.next,
-                      hintText: "Qualification",
+                      hintText: "Job Title",
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Please enter qualification";
+                          return "Please enter job title";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const BaseText(text: "Skills"),
+                    InputTextField(
+                      controller: controller.skillsController,
+                      textInputAction: TextInputAction.next,
+                      hintText: "skills",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter skills";
                         }
                         return null;
                       },
@@ -64,7 +78,7 @@ class AddEducationSectionView extends GetView<EducationController> {
                             onTap: () async {
                               FocusScope.of(context).unfocus();
                               var cancelDate =
-                              await DatePickerUtils().showDatePickerDialog(
+                                  await DatePickerUtils().showDatePickerDialog(
                                 context,
                                 controller.startDate.value,
                                 DateTime(3000),
@@ -93,7 +107,7 @@ class AddEducationSectionView extends GetView<EducationController> {
                             onTap: () async {
                               FocusScope.of(context).unfocus();
                               var cancelDate =
-                              await DatePickerUtils().showDatePickerDialog(
+                                  await DatePickerUtils().showDatePickerDialog(
                                 context,
                                 controller.endDate.value,
                                 DateTime(3000),
@@ -126,16 +140,15 @@ class AddEducationSectionView extends GetView<EducationController> {
                 onPressed: () {
                   if (controller.formKey.currentState!.validate()) {
                     if (controller.isInserted.value == false) {
-                      var data = Education(
-                          universityName:
-                          controller.universityNameController.value.text,
-                          qualification:
-                          controller.qualificationController.value.text,
+                      var data = Career(
+                          companyName: controller.companyNameController.text,
+                          jobTitle: controller.jobTitleController.text,
+                          skills: controller.skillsController.text,
                           startDate:
-                          Timestamp.fromDate(controller.startDate.value),
-                          endDate: Timestamp.fromDate(controller.endDate
-                              .value));
-                      controller.educationDatabaseService.add(data);
+                              Timestamp.fromDate(controller.startDate.value),
+                          endDate:
+                              Timestamp.fromDate(controller.endDate.value));
+                      controller.careerDatabaseService.add(data);
                       Fluttertoast.showToast(
                           msg: "Data inserted successfully",
                           toastLength: Toast.LENGTH_SHORT,
@@ -146,16 +159,15 @@ class AddEducationSectionView extends GetView<EducationController> {
                           fontSize: 16.0);
                       controller.isInserted.value = true;
                     } else {
-                      var data = Education(
-                          universityName:
-                          controller.universityNameController.value.text,
-                          qualification:
-                          controller.qualificationController.value.text,
+                      var data = Career(
+                          companyName: controller.companyNameController.text,
+                          jobTitle: controller.jobTitleController.text,
+                          skills: controller.skillsController.text,
                           startDate:
-                          Timestamp.fromDate(controller.startDate.value),
-                          endDate: Timestamp.fromDate(controller.endDate
-                              .value));
-                      controller.educationDatabaseService.update('0', data);
+                              Timestamp.fromDate(controller.startDate.value),
+                          endDate:
+                              Timestamp.fromDate(controller.endDate.value));
+                      controller.careerDatabaseService.update('0', data);
                       Fluttertoast.showToast(
                           msg: "Data updated successfully",
                           toastLength: Toast.LENGTH_SHORT,
