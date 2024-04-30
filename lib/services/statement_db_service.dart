@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resume_builder_twinkle/models/personal_statement_model.dart';
 
-const String TODO_COLLECTON_REF = "personal_statement";
+const String COLLECTON_REF = "personal_statement";
 
-class DatabaseService {
+class StatementDatabaseService {
   final _firestore = FirebaseFirestore.instance;
 
   late final CollectionReference _statementRef;
 
-  DatabaseService() {
+  StatementDatabaseService() {
     _statementRef = _firestore
-        .collection(TODO_COLLECTON_REF)
+        .collection(COLLECTON_REF)
         .withConverter<PersonalStatement>(
             fromFirestore: (snapshots, _) => PersonalStatement.fromJson(
                   snapshots.data()!,
@@ -18,19 +18,19 @@ class DatabaseService {
             toFirestore: (statement, _) => statement.toJson());
   }
 
-  Stream<QuerySnapshot> getTodos() {
+  Stream<QuerySnapshot> getStatement() {
     return _statementRef.snapshots();
   }
 
-  void addTodo(PersonalStatement statement) async {
+  void add(PersonalStatement statement) async {
     _statementRef.add(statement);
   }
 
-  void updateTodo(String statementId, PersonalStatement statement) {
+  void update(String statementId, PersonalStatement statement) {
     _statementRef.doc(statementId).update(statement.toJson());
   }
 
-  void deleteTodo(String statementId) {
+  void delete(String statementId) {
     _statementRef.doc(statementId).delete();
   }
 }

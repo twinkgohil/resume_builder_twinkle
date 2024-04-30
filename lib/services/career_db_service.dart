@@ -1,35 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resume_builder_twinkle/models/career_model.dart';
 
-const String TODO_COLLECTON_REF = "career";
+const String COLLECTON_REF = "career";
 
-class DatabaseService {
+class CareerDatabaseService {
   final _firestore = FirebaseFirestore.instance;
 
   late final CollectionReference _careerRef;
 
-  DatabaseService() {
+  CareerDatabaseService() {
     _careerRef =
-        _firestore.collection(TODO_COLLECTON_REF).withConverter<Career>(
+        _firestore.collection(COLLECTON_REF).withConverter<Career>(
             fromFirestore: (snapshots, _) => Career.fromJson(
                   snapshots.data()!,
                 ),
             toFirestore: (career, _) => career.toJson());
   }
 
-  Stream<QuerySnapshot> getTodos() {
+  Stream<QuerySnapshot> getCareerData() {
     return _careerRef.snapshots();
   }
 
-  void addTodo(Career careerDetail) async {
+  void add(Career careerDetail) async {
     _careerRef.add(careerDetail);
   }
 
-  void updateTodo(String careerId, Career careerDetail) {
+  void update(String careerId, Career careerDetail) {
     _careerRef.doc(careerId).update(careerDetail.toJson());
   }
 
-  void deleteTodo(String careerId) {
+  void delete(String careerId) {
     _careerRef.doc(careerId).delete();
   }
 }

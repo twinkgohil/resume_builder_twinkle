@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resume_builder_twinkle/modules/home.dart';
+import 'package:resume_builder_twinkle/modules/contact_info/contact_info_binding.dart';
+import 'package:resume_builder_twinkle/modules/contact_info/contact_info_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Homeview(),
+      initialBinding: ContactInfoBinding(),
+      home: const ContactInfoView(),
     );
   }
 }
