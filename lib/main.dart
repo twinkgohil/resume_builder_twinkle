@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resume_builder_twinkle/modules/contact_info/contact_info_binding.dart';
 import 'package:resume_builder_twinkle/modules/contact_info/contact_info_view.dart';
+import 'package:resume_builder_twinkle/modules/splash/splash_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +21,10 @@ class MyApp extends StatelessWidget {
       title: 'Resume Builder',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      initialBinding: ContactInfoBinding(),
-      home: const ContactInfoView(),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+          scaffoldBackgroundColor: Colors.white),
+      home: const SplashView(),
     );
   }
 }

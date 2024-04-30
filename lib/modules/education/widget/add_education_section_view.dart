@@ -18,159 +18,162 @@ class AddEducationSectionView extends GetView<EducationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BaseAppBar(title: "Add education"),
-      body: Obx(() {
-        return Column(
-          children: [
-            Form(
-                key: controller.formKey,
-                child: Column(
-                  children: [
-                    const BaseText(text: "University/School name"),
-                    InputTextField(
-                      controller: controller.universityNameController,
-                      textInputAction: TextInputAction.next,
-                      hintText: "University/School name",
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter University/School name";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const BaseText(text: "Qualification"),
-                    InputTextField(
-                      controller: controller.qualificationController,
-                      textInputAction: TextInputAction.next,
-                      hintText: "Qualification",
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter qualification";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: Get.width / 2.5,
-                          child: GestureDetector(
-                            onTap: () async {
-                              FocusScope.of(context).unfocus();
-                              var cancelDate =
-                              await DatePickerUtils().showDatePickerDialog(
-                                context,
-                                controller.startDate.value,
-                                DateTime(3000),
-                                DateTime.now(),
-                              );
-                              if (cancelDate != null) {
-                                controller.startDate.value = cancelDate;
-                                controller.startDateController.text =
-                                    DateFormat('dd-MM-yyyy').format(cancelDate);
-                              } else {
-                                controller.startDateController.clear();
-                              }
-                            },
-                            child: AbsorbPointer(
-                              child: InputTextField(
-                                controller: controller.startDateController,
-                                hintText: 'Start Date',
+        appBar: const BaseAppBar(title: "Add education"),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Form(
+                  key: controller.formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const BaseText(text: "University/School name"),
+                      InputTextField(
+                        controller: controller.universityNameController,
+                        textInputAction: TextInputAction.next,
+                        hintText: "University/School name",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter University/School name";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const BaseText(text: "Qualification"),
+                      InputTextField(
+                        controller: controller.qualificationController,
+                        textInputAction: TextInputAction.next,
+                        hintText: "Qualification",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter qualification";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: Get.width / 2.5,
+                            child: GestureDetector(
+                              onTap: () async {
+                                FocusScope.of(context).unfocus();
+                                var cancelDate = await DatePickerUtils()
+                                    .showDatePickerDialog(
+                                  context,
+                                  controller.startDate.value,
+                                  DateTime(1000),
+                                  DateTime.now(),
+                                );
+                                if (cancelDate != null) {
+                                  controller.startDate.value = cancelDate;
+                                  controller.startDateController.text =
+                                      DateFormat('dd-MM-yyyy')
+                                          .format(cancelDate);
+                                } else {
+                                  controller.startDateController.clear();
+                                }
+                              },
+                              child: AbsorbPointer(
+                                child: InputTextField(
+                                  controller: controller.startDateController,
+                                  hintText: 'Start Date',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const Spacer(),
-                        SizedBox(
-                          width: Get.width / 2.5,
-                          child: GestureDetector(
-                            onTap: () async {
-                              FocusScope.of(context).unfocus();
-                              var cancelDate =
-                              await DatePickerUtils().showDatePickerDialog(
-                                context,
-                                controller.endDate.value,
-                                DateTime(3000),
-                                DateTime.now(),
-                              );
-                              if (cancelDate != null) {
-                                controller.endDate.value = cancelDate;
-                                controller.endDateDateController.text =
-                                    DateFormat('dd-MM-yyyy').format(cancelDate);
-                              } else {
-                                controller.endDateDateController.clear();
-                              }
-                            },
-                            child: AbsorbPointer(
-                              child: InputTextField(
-                                controller: controller.endDateDateController,
-                                hintText: 'End Date',
+                          const Spacer(),
+                          SizedBox(
+                            width: Get.width / 2.5,
+                            child: GestureDetector(
+                              onTap: () async {
+                                FocusScope.of(context).unfocus();
+                                var cancelDate = await DatePickerUtils()
+                                    .showDatePickerDialog(
+                                  context,
+                                  controller.endDate.value,
+                                  DateTime(1000),
+                                  DateTime.now(),
+                                );
+                                if (cancelDate != null) {
+                                  controller.endDate.value = cancelDate;
+                                  controller.endDateDateController.text =
+                                      DateFormat('dd-MM-yyyy')
+                                          .format(cancelDate);
+                                } else {
+                                  controller.endDateDateController.clear();
+                                }
+                              },
+                              child: AbsorbPointer(
+                                child: InputTextField(
+                                  controller: controller.endDateDateController,
+                                  hintText: 'End Date',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                )),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  if (controller.formKey.currentState!.validate()) {
-                    if (controller.isInserted.value == false) {
-                      var data = Education(
-                          universityName:
-                          controller.universityNameController.value.text,
-                          qualification:
-                          controller.qualificationController.value.text,
-                          startDate:
-                          Timestamp.fromDate(controller.startDate.value),
-                          endDate: Timestamp.fromDate(controller.endDate
-                              .value));
-                      controller.educationDatabaseService.add(data);
-                      Fluttertoast.showToast(
-                          msg: "Data inserted successfully",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.green,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                      controller.isInserted.value = true;
-                    } else {
-                      var data = Education(
-                          universityName:
-                          controller.universityNameController.value.text,
-                          qualification:
-                          controller.qualificationController.value.text,
-                          startDate:
-                          Timestamp.fromDate(controller.startDate.value),
-                          endDate: Timestamp.fromDate(controller.endDate
-                              .value));
-                      controller.educationDatabaseService.update('0', data);
-                      Fluttertoast.showToast(
-                          msg: "Data updated successfully",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.green,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
+                        ],
+                      )
+                    ],
+                  )),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    if (controller.formKey.currentState!.validate()) {
+                      if (controller.isInserted.value == false) {
+                        var data = Education(
+                            universityName:
+                                controller.universityNameController.value.text,
+                            qualification:
+                                controller.qualificationController.value.text,
+                            startDate:
+                                Timestamp.fromDate(controller.startDate.value),
+                            endDate:
+                                Timestamp.fromDate(controller.endDate.value));
+                        controller.educationDatabaseService.add(data);
+                        Fluttertoast.showToast(
+                            msg: "Data inserted successfully",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.green,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                        controller.isInserted.value = true;
+                      } else {
+                        var data = Education(
+                            universityName:
+                                controller.universityNameController.value.text,
+                            qualification:
+                                controller.qualificationController.value.text,
+                            startDate:
+                                Timestamp.fromDate(controller.startDate.value),
+                            endDate:
+                                Timestamp.fromDate(controller.endDate.value));
+                        controller.educationDatabaseService.update('0', data);
+                        Fluttertoast.showToast(
+                            msg: "Data updated successfully",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.green,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      }
                     }
-                  }
-                },
-                child: const Text('Save')),
-          ],
-        );
-      }),
-    );
+                  },
+                  child: const Text('Save')),
+            ],
+          ),
+        ));
   }
 }

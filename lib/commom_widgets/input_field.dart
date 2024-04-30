@@ -94,11 +94,11 @@ class InputTextField extends StatelessWidget {
             border: OutlineInputBorder(),
             enabledBorder: OutlineInputBorder(
               borderSide:
-              BorderSide( color:Colors.blue, width: 1.0),
+              BorderSide( color:Colors.grey, width: 1.0),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide:
-              BorderSide(color:Colors.blue, width: 2.0),
+              BorderSide(color:Colors.grey, width: 2.0),
             ),
              labelStyle: TextStyle(
                   fontSize: 12,

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 
 class DatePickerUtils {
@@ -19,7 +18,7 @@ class DatePickerUtils {
                   onSurface: Colors.black26,
                 ),
                 textButtonTheme: TextButtonThemeData(
-                    style: TextButton.styleFrom(foregroundColor: Colors.grey))),
+                    style: TextButton.styleFrom(foregroundColor: Colors.black))),
             child: child!));
     if (selected != null && selected != selectedDate) {
       selectedDate = selected;

@@ -24,6 +24,7 @@ class AddCareerSectionView extends GetView<CareerController> {
             Form(
                 key: controller.formKey,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const BaseText(text: "Company Name"),
                     InputTextField(

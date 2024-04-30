@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:resume_builder_twinkle/commom_widgets/base_appbar.dart';
 import 'package:resume_builder_twinkle/commom_widgets/base_text.dart';
 import 'package:resume_builder_twinkle/modules/career/career_controller.dart';
+import 'package:resume_builder_twinkle/modules/career/widget/add_career_section_view.dart';
+import 'package:resume_builder_twinkle/utiils/math.dart';
 
 class CareerView extends GetView<CareerController> {
   const CareerView({super.key});
@@ -12,26 +14,44 @@ class CareerView extends GetView<CareerController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BaseAppBar(title: 'Add Career details'),
-      body: Column(
-        children: [
-          ListView.builder(
-              shrinkWrap: true,
-              itemCount: controller.dataLength.value,
-              itemBuilder: (BuildContext context, int index) =>
-                  addSectionWidget(index: index)),
-        ],
-      ),
+      body: Obx(() {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.dataLength.value,
+                  itemBuilder: (BuildContext context, int index) =>
+                      addSectionWidget(index: index)),
+              SizedBox(height: getSize(20),),
+              addSectionButton()
+            ],
+          ),
+        );
+      }),
     );
   }
 
   Widget addSectionWidget({required int index}) {
-    return Container(
-      height: 30,
-      width: Get.width,
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(10)),
-      child: BaseText(text: "Section ${index + 1}"),
+    return Padding(
+      padding: EdgeInsets.only(top: getSize(8), bottom: getSize(8)),
+      child: GestureDetector(
+        onTap: (){
+          Get.to(const AddCareerSectionView());
+        },
+        child: Container(
+          height: 50,
+          width: Get.width,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(10)),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BaseText(text: "Section ${index + 1}"),
+          ),
+        ),
+      ),
     );
   }
 
@@ -41,12 +61,15 @@ class CareerView extends GetView<CareerController> {
         controller.dataLength.value++;
       },
       child: Container(
-        height: 30,
+        height: 50,
         width: Get.width,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.green),
             borderRadius: BorderRadius.circular(10)),
-        child: const BaseText(text: "+ Add Section"),
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: BaseText(text: "+ Add Section"),
+        ),
       ),
     );
   }
